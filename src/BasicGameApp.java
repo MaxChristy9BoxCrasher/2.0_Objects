@@ -39,7 +39,7 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
-
+	public Image galaxyPic;
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
@@ -64,12 +64,14 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
+		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png");
+		galaxyPic = Toolkit.getDefaultToolkit().getImage("image(3).jpeg");
+		//load the picture
 		astro = new Astronaut(10,100);
 		astro2 = new Astronaut(100,100);
 		astro.dx = 10;
 		astro2.dy = (int)(Math.random()*10)+1;
-		astro3 = new Astronaut(100,(int)(Math.random()*10)+1);
+		astro3 = new Astronaut((int)(Math.random()*900),(int)(Math.random()*700)+1);
 		astro.dy = (int)(Math.random()*8)+1;
 		astro.dx = (int)(Math.random()*13)+1;
 
@@ -101,9 +103,20 @@ public class BasicGameApp implements Runnable {
 		astro.move();
 		astro2.move();
 		astro3.move();
-		System.out.println(astro.dx);
+		crashing();
+		//System.out.println(astro.dx);
 
 
+
+
+		}
+
+	public void crashing() {
+		if (astro.hitBox.intersects(astro2.hitBox)) {
+			System.out.println("crash");
+			astro.dx = -astro.dx;
+			astro2.dx = -astro2.dx;
+		}
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -155,10 +168,13 @@ public class BasicGameApp implements Runnable {
 
 
       //draw the image of the astronaut
+		g.drawImage(galaxyPic, 0, 0, WIDTH, HEIGHT, null);
+
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 		g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
 		g.drawImage(astroPic, astro3.xpos, astro3.ypos, astro3.width, astro3.height, null);
 		// end coding here
+
 		g.dispose();
 
 		bufferStrategy.show();
