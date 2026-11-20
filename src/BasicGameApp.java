@@ -117,6 +117,11 @@ public class BasicGameApp implements Runnable {
 			astro.dx = -astro.dx;
 			astro2.dx = -astro2.dx;
 		}
+		if (astro.hitBox.intersects(astro2.hitBox)){
+			System.out.println("Big");
+			astro.width = astro.width+1;
+			astro2.width = astro2.width+1;
+		}
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
