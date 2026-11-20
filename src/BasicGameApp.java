@@ -69,7 +69,7 @@ public class BasicGameApp implements Runnable {
 		//load the picture
 		astro = new Astronaut(10,100);
 		astro2 = new Astronaut(100,100);
-		astro.dx = 10;
+		astro2.dx = 10;
 		astro2.dy = (int)(Math.random()*10)+1;
 		astro3 = new Astronaut((int)(Math.random()*900),(int)(Math.random()*700)+1);
 		astro.dy = (int)(Math.random()*8)+1;
@@ -116,12 +116,26 @@ public class BasicGameApp implements Runnable {
 			System.out.println("crash");
 			astro.dx = -astro.dx;
 			astro2.dx = -astro2.dx;
-		}
-		if (astro.hitBox.intersects(astro2.hitBox)){
-			System.out.println("Big");
+
+		//}
+	//	if (astro.hitBox.intersects(astro2.hitBox)){
+			//System.out.println("crash");
 			astro.width = astro.width+1;
 			astro2.width = astro2.width+1;
+
+
+		//if (astro.hitBox.intersects(astro2.hitBox)){
+		//System.out.println("crash");
+		astro.height = astro.height + 1;
+		astro2.height = astro2.height + 1;
+
+		astro.crashing=true;
+	}
+		if (!astro.hitBox.intersects(astro2.hitBox)) {
+			astro.crashing = false;
 		}
+
+
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
